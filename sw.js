@@ -1,5 +1,5 @@
 // Bei jeder Änderung an der App die Version erhöhen, damit iPhones die neue Version laden.
-const CACHE = 'bankroll-v1';
+const CACHE = 'bankroll-v2';
 const FILES = ['./', 'index.html', 'manifest.webmanifest', 'icons/apple-touch-icon.png', 'icons/icon-192.png', 'icons/icon-512.png'];
 
 self.addEventListener('install', e => {
