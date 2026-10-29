@@ -8,7 +8,7 @@ Sie startet im Vollbild wie eine normale App, funktioniert auch offline und spei
 1. Diesen Branch in `main` mergen.
 2. Auf GitHub: **Settings → Pages → Build and deployment → Source: «Deploy from a branch»**, Branch `main`, Ordner `/ (root)`, speichern.
    GitHub Pages für private Repos braucht GitHub Pro – sonst das Repo auf **Public** stellen (deine Daten liegen nie im Repo, nur auf dem iPhone).
-3. Nach ca. 1 Minute ist die App unter `https://noray57.github.io/Test/` erreichbar.
+3. Nach ca. 1 Minute ist die App unter `https://noray57.github.io/Bankroll/` erreichbar.
 
 ## Auf den Home-Bildschirm legen
 
