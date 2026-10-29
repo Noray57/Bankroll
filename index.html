@@ -101,11 +101,6 @@ nav .add{width:52px;height:52px;border-radius:50%;background:var(--accent);color
 .toast.show{opacity:1;transform:translateX(-50%)}
 .hint{font-size:12px;color:var(--mute);text-align:center;margin:18px 10px 0;line-height:1.5}
 .hint a{color:var(--mute)}
-.install{display:flex;gap:10px;align-items:flex-start;background:var(--card2);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;margin-bottom:12px;font-size:13px}
-.install[hidden]{display:none}
-.install b{display:block;font-size:14px;margin-bottom:2px}
-.install .sub{font-size:12px}
-.install .x{flex:none;width:26px;height:26px;font-size:13px}
 .btns{display:flex;flex-direction:column;gap:8px}
 .btn.sec{background:var(--card2);color:var(--text)}
 html{overscroll-behavior:none}
@@ -119,7 +114,6 @@ input,textarea{-webkit-user-select:text;user-select:text}
     <h1>Bank<span>roll</span></h1>
     <div class="sync"><span class="dot" id="dot"></span><span id="syncTxt">Lädt…</span></div>
   </header>
-  <div class="install" id="install" hidden><div style="flex:1"><b>Als App installieren</b><span class="sub">In Safari unten auf <b style="display:inline;font-size:inherit">Teilen ⬆︎</b> tippen und dann <b style="display:inline;font-size:inherit">«Zum Home-Bildschirm»</b> wählen.</span></div><button class="x" id="instX" aria-label="Schliessen">✕</button></div>
   <div class="chips" id="chips"></div>
   <main id="view"></main>
 </div>
@@ -533,15 +527,8 @@ $('#ovImp').addEventListener('click',ev=>{if(ev.target.id==='ovImp')closeImport(
 $('#impGo').onclick=()=>runImport($('#impTxt').value);
 $('#impFile').onchange=async ev=>{const f=ev.target.files[0];if(!f)return;try{runImport(await f.text())}catch(e){$('#impErr').textContent='Datei konnte nicht gelesen werden.'}ev.target.value=''};
 
-/* ---------- install hint & offline ---------- */
-(function(){
-  const standalone=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches;
-  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
-  let hidden=false;try{hidden=localStorage.getItem('bankroll.hideInstall')==='1'}catch(e){}
-  if(ios&&!standalone&&!hidden)$('#install').hidden=false;
-  $('#instX').onclick=()=>{$('#install').hidden=true;try{localStorage.setItem('bankroll.hideInstall','1')}catch(e){}};
-  if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
-})();
+/* ---------- offline ---------- */
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).catch(()=>{}));
 
 initStore();
 })();
